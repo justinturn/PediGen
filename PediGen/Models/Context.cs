@@ -7,8 +7,13 @@ using System.Data.Entity;
 
 namespace PediGen.Models
 {
-    class Context : DbContext 
+    class PedigreeContext : DbContext 
     {
+        public PedigreeContext(): base("name=Context")
+        {
+            Database.SetInitializer<PedigreeContext>(new CreateDatabaseIfNotExists<PedigreeContext>());
+
+        }
         public DbSet<Pig> Pigs { get; set; }
         public DbSet<Breeder> Breeders { get; set; }
         public DbSet<Litter> Litters { get; set; }

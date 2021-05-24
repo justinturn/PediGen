@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +10,9 @@ namespace PediGen.Models
 {
     class Pig
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+
         public int PigID { get; set; }
         public string PigName { get; set; }
         public string EarNotch { get; set; }
