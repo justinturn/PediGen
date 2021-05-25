@@ -9,7 +9,7 @@ namespace PediGen.Models
 {
     class PedigreeContext : DbContext 
     {
-        public PedigreeContext(): base("name=Context")
+        public PedigreeContext()
         {
             Database.SetInitializer<PedigreeContext>(new CreateDatabaseIfNotExists<PedigreeContext>());
 

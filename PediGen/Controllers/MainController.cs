@@ -9,7 +9,7 @@ namespace PediGen.Controllers
 {
     class MainController
     {
-        public void CreateLitter(int numMales, int numFemale, int numBornTotal, DateTime DOB, int sireReg, int damReg)
+        public Litter CreateLitter(int numMales, int numFemale, int litterNotch, List<int> boarNotch, List<int> giltNotch, int numBornTotal, DateTime DOB, int sireReg, int damReg, string stress)
         {
             var newLitter = new Models.Litter();
 
@@ -17,6 +17,42 @@ namespace PediGen.Controllers
             newLitter.sireRegistration = sireReg;
             newLitter.numberBorn = numBornTotal;
             newLitter.numberBornAlive = numMales + numFemale;
+            newLitter.dateRegistered = System.DateTime.Now;
+            newLitter.DOB = DOB;
+
+            var sireName = "TESTSIRE"; //function to get sirename on reg id
+            var damName = "TESTDAM";
+
+            List<Pig> PigsList = new List<Pig>();
+
+            //Add Boars
+            for (int i = 0; i < boarNotch.Count; i++)
+            {
+                PigsList.Add(CreatePig(litterNotch, boarNotch[i], true, sireName, damName, stress));
+            }
+
+            //Add Gilts
+            for (int i = 0; i < giltNotch.Count; i++)
+            {
+                PigsList.Add(CreatePig(litterNotch, giltNotch[i], false, sireName, damName, stress));
+                //var pig = CreatePig(litterNotch, boarNotch[i], true, sireName, damName, stress);
+                //newLitter.Pigs.Add(pig);
+            }
+
+            newLitter.Pigs = PigsList;
+
+            return newLitter;
+        }
+        private Pig CreatePig(int litterNotch, int pigNotch, bool isMale, string SireName, string damName, string stress)
+        {
+            Pig newPig = new Pig();
+            newPig.EarNotch = $@"{litterNotch}-{pigNotch}";
+            newPig.isMale = isMale;
+            //newPig.PigID = 1;
+            newPig.PigName = (isMale == true) ? SireName : damName;
+            newPig.RegistrationNumber = $@"49730001{pigNotch.ToString()}"; //some auto incrememnt unique formula 
+            newPig.stressStatus = stress;
+            return newPig;
         }
         private void CreateLitterID()
         {

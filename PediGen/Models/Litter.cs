@@ -10,16 +10,15 @@ namespace PediGen.Models
 {
     class Litter
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
+        [Key, Column(Order = 0), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int litterID { get; set; }
         public int sireRegistration { get; set; }
         public int damRegistration { get; set; }
         public int numberBorn { get; set; }
         public int numberBornAlive { get; set; }
 
-        public DateTime DOB { get; set; }
-        public DateTime dateRegistered { get; set; }
+        public DateTime? DOB { get; set; }
+        public DateTime? dateRegistered { get; set; } 
         public virtual List<Pig> Pigs { get; set; }
     }
 }

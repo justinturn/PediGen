@@ -10,13 +10,12 @@ namespace PediGen.Models
 {
     class Pig
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-
+        [Key, Column(Order = 0), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PigID { get; set; }
         public string PigName { get; set; }
         public string EarNotch { get; set; }
         public Boolean isMale { get; set; }
+        [Key, Column(Order = 1)]
         public string RegistrationNumber { get; set; }
         public string stressStatus { get; set; }
         public virtual Litter Litter { get; set; }

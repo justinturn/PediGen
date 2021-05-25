@@ -10,10 +10,11 @@ namespace PediGen.Models
 {
     class Breeder
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-
+        [Key, Column(Order = 0), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int breederID { get; set; }
+        [Key, Column(Order = 1)]
+        public int ownerNumber { get; set; }
+
         public string herdmark { get; set; }
         public string name { get; set; }
         public string addressStreet { get; set; }
